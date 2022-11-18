@@ -10,22 +10,14 @@ import sqlite3
 import queries as q
 
 
-# step 1: connect to database
-# make sure spelling is correct
-# assumes rpg_db is in the cwd
-connection = sqlite3.connect(
-    "rpg_db.sqlite3"
-)  # returns Connection object, same as sqlite3.Connection()
+def connect_to_db_cursor(db_name="rpg_db.sqlite3"):
+    return sqlite3.connect(db_name).cursor()
 
-# step 2: Make the "cursur" / accessor
-cursor = connection.cursor()
 
-# step 3: Write the query
-# see queries.py
-
-# step 4: Execute the query & fetch the results
-results = cursor.execute(q.SELECT_ALL).fetchall()
+def execute_q(cursor, query):
+    return cursor.execute(query).fetchall()
 
 
 if __name__ == "__main__":
-    print(results[:5])
+    curs = connect_to_db_cursor()
+    print(execute_q(curs, q.SELECT_ALL))
