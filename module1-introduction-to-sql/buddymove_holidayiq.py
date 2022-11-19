@@ -12,14 +12,14 @@ import pandas as pd  # for df.to_sql
 queries = {
     "TOTAL_ROWS": """SELECT COUNT(*) FROM review""",
     "TOTAL_>100NATURE_OR_>100SHOPPING": """SELECT COUNT(*) FROM review
-    WHERE Shopping >= 100 OR Nature >= 100""",
+    WHERE Shopping >= 100 AND Nature >= 100""",
     "AVG_BY_CATEGORY": """SELECT AVG(Sports), AVG(Religious), AVG(Nature),AVG(Theatre), AVG(Shopping), AVG(Picnic) FROM review """,
 }
 
 
 def csv_to_db(
     con,
-    csv_name="buddymove_holidayiq.csv",
+    csv_name="module1-introduction-to-sql\buddymove_holidayiq.csv",
 ):
     """Using an existing sqlite3 connection, writes contents of a csv to a new table.
 
