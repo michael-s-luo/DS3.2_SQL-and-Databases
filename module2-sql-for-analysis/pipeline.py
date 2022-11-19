@@ -1,16 +1,19 @@
+from os import getenv
+from dotenv import load_dotenv
 import psycopg2
 from sqlite_example import connect_to_db_cursor, execute_q
 import queries as q
 
 # PostgreSQL connection credentials
 
-# User & default database from ElephantSQL
-DBNAME = "**********"
-USER = "**********"
+# User & default database from ElephantSQL .env variables
+load_dotenv()
+DBNAME = getenv("DBNAME")
+USER = getenv("USER")
 # Passworld from ElephantSQL
-PASSWORD = "************************"
+PASSWORD = getenv("PASSWORD")
 # Server from ElephantSQL
-HOST = "heffalump.db.elephantsql.com"
+HOST = getenv("HOST")
 
 
 def con_to_pg(dbname=DBNAME, user=USER, password=PASSWORD, host=HOST):
