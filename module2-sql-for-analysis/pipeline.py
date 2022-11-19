@@ -5,10 +5,10 @@ import queries as q
 # PostgreSQL connection credentials
 
 # User & default database from ElephantSQL
-DBNAME = "ktvbdupp"
-USER = "ktvbdupp"
+DBNAME = "**********"
+USER = "**********"
 # Passworld from ElephantSQL
-PASSWORD = "LORAIOWjZ50rEwvDhehxLXKBw7Cb0Rn_"
+PASSWORD = "************************"
 # Server from ElephantSQL
 HOST = "heffalump.db.elephantsql.com"
 
