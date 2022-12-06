@@ -42,31 +42,51 @@ def con_to_pg(dbname=DBNAME, user=USER, password=PASSWORD, host=HOST):
     return pg_conn, pg_curs
 
 
-def modify_db(conn, curs, query):
-    """Executes sql query or statement against pg database using existing connection and cursor
+def modify_db(conn, curs, statement: str | list[str]):
+    """Executes sql statement against pg database using existing connection and cursor
 
     Parameters
     ----------
     conn : psycopg2 connection
     curs : psycopg2 cursor
-    query : str | list[str]
-        SQL query(s) or statement(s)
+    statement : str | list[str]
+        SQL statement(s)
     """
 
-    if isinstance(query, list):
-        for q in query:
-            curs.execute(q)
-        return
+    if isinstance(statement, list):
+        for s in statement:
+            curs.execute(s)
+    else:
+        curs.execute(statement)
 
-    curs.execute(query)
     conn.commit()
+
+
+def query_db(conn, curs, query: str):
+    """Queries posgresql db using existing connection & cursor
+
+    Parameters
+    ----------
+    conn : psycopg2 connection
+
+    curs : psycopg2 cursor
+
+    query : str
+        posgreSQL query
+
+    Returns
+    -------
+    list of tuples representing rows
+    """
+    curs.execute(query)
+    return curs.fetchall()
 
 
 if __name__ == "__main__":
     # Test table functions
-    # pg_curs.execute(DROP_TEST_TABLE)
-    # pg_curs.execute(CREATE_TEST_TABLE)
-    # pg_curs.execute(INSERT_TEST_TABLE)
+    # pg_curs.execute(q.DROP_TEST_TABLE)
+    # pg_curs.execute(q.CREATE_TEST_TABLE)
+    # pg_curs.execute(q.INSERT_TEST_TABLE)
 
     # Test creating & inserting character table for rpg
     # pg_curs.execute(q.DROP_CHARACTER_TABLE)
@@ -99,6 +119,18 @@ if __name__ == "__main__":
                 );
             """,
         )
+
+    # Test query
+    print(
+        query_db(
+            pg_conn,
+            pg_curs,
+            query="""
+            SELECT * FROM characterscreator_character
+            LIMIT 5;
+        """,
+        )
+    )
 
     # close
     pg_curs.close()

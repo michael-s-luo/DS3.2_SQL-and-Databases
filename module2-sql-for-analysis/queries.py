@@ -4,7 +4,7 @@ Date: 2022/11/18
 """
 
 
-# Table Functions --------------------------------------------------------------
+# Guided Lecture: Table Functions ----------------------------------------------
 
 CREATE_TEST_TABLE = """
         CREATE TABLE IF NOT EXISTS test_table
@@ -41,19 +41,19 @@ DROP_CHARACTER_TABLE = """
         DROP TABLE IF EXISTS characterscreator_character;
 """
 
-# INSERT statements for rpg_db--------------------------------------------------
+# Guided Lecture: INSERT statements for rpg_db-----------------------------------
 INSERT_MICHAEL = """
         INSERT INTO characters(
-                "name", "level", "exp", "hp", "strength", "intelligence", "dexterity", "wisdom"
+                "name", "level", "exp", "hp", "strength", "intelligence", 
+                "dexterity", "wisdom"
         )
         VALUES(
-                'Michael L', 69, 420, 420, 420, 420, 420, 420
+                'Michael L', 69, 420, 420, 420, 420, 
+                420, 420
         );
 """
 
-
-# Queries for rpg_db-------------------------------------------------------------
-
+# Queries for rpg_db------------------------------------------------------------
 SELECT_ALL_CHARACTERS = """
         SELECT * 
         FROM charactercreator_character
