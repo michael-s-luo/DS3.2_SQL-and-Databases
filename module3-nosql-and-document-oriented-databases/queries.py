@@ -1,6 +1,6 @@
 """
 Unit 3.2.2 Guided Project / Lecture
-Date: 2022/11/18
+Date: 2022/12/12
 """
 
 
@@ -57,6 +57,39 @@ INSERT_MICHAEL = """
 SELECT_ALL_CHARACTERS = """
         SELECT * 
         FROM charactercreator_character
+"""
+
+# selects all items associated with a certain character id
+# use with .format()
+SELECT_CHARACTER_ITEMS_FORMAT = """
+        SELECT ai.name FROM 
+        charactercreator_character as cc
+        LEFT JOIN 
+        charactercreator_character_inventory as cc_inv
+        ON
+        cc.character_id = cc_inv.character_id
+        LEFT JOIN
+        armory_item as ai
+        ON 
+        cc_inv.item_id = ai.item_id
+        WHERE cc.character_id = {};
+"""
+
+# selects all weapons associated with a certain character id
+# use with .format()
+SELECT_CHARACTER_WEAPONS_FORMAT = """
+        SELECT ai.name FROM 
+        charactercreator_character as cc
+        LEFT JOIN 
+        charactercreator_character_inventory as cc_inv
+        ON
+        cc.character_id = cc_inv.character_id
+        LEFT JOIN
+        armory_item as ai
+        ON 
+        cc_inv.item_id = ai.item_id
+        WHERE cc.character_id = {}
+        AND ai.item_id IN (SELECT item_ptr_id FROM armory_weapon);
 """
 
 
