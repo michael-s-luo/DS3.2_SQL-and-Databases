@@ -46,9 +46,25 @@ def mongo_connect(
     return client[dbname][collection_name]
 
 
+def show_all(col) -> list:
+    """Queries for every document in a collection
+
+    Parameters
+    ----------
+    col : pymongo Collection
+
+    Returns
+    -------
+    list of documents
+        tuple format for documents
+    """
+    return list(col.find())
+
+
 if __name__ == "__main__":
     # connect to MongoDB
     collection = mongo_connect()
+    collection.drop()
 
     # Get data from SQLite
     sl_curs = sqlite.connect_to_db_cursor()
@@ -90,3 +106,5 @@ if __name__ == "__main__":
         }
 
         collection.insert_one(character_document)
+
+    print(show_all(collection))
