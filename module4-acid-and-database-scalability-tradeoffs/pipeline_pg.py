@@ -2,8 +2,8 @@
 Unit 3.2.4 Assignment
 Date: 2022/12/13
 
-Functions to connect to and query with our PosgreSQL database on 
-ElephantSQL.
+Helper functions to connect to and query our PosgreSQL database on 
+ElephantSQL containing the titanic dataset.
 
 """
 
@@ -11,9 +11,6 @@ ElephantSQL.
 from os import getenv
 from dotenv import load_dotenv
 import psycopg2
-
-# from sqlite_example import connect_to_db_cursor, execute_q, DELETE THIS
-# import queries as q, DELETE THIS
 
 # PostgreSQL connection credentials
 # User & default database from ElephantSQL .env variables
@@ -90,59 +87,3 @@ def query_db(curs, query: str):
     """
     curs.execute(query)
     return curs.fetchall()
-
-
-# TODO: delete main
-if __name__ == "__main__":
-    # Test table functions
-    # pg_curs.execute(q.DROP_TEST_TABLE)
-    # pg_curs.execute(q.CREATE_TEST_TABLE)
-    # pg_curs.execute(q.INSERT_TEST_TABLE)
-
-    # Test creating & inserting character table for rpg
-    # pg_curs.execute(q.DROP_CHARACTER_TABLE)
-    # pg_curs.execute(q.CREATE_CHARACTER_TABLE)
-    # pg_curs.execute(q.INSERT_MICHAEL)
-
-    # Instantiate pg db connections
-    pg_conn, pg_curs = con_to_pg()
-
-    # Create pg db character table
-    modify_db(pg_conn, pg_curs, q.DROP_CHARACTER_TABLE)
-    modify_db(pg_conn, pg_curs, q.CREATE_CHARACTER_TABLE)
-
-    # Query all rows from characters table in rpg_db sqlite3
-    sl_cursor = connect_to_db_cursor()
-    characters_result = execute_q(sl_cursor, q.SELECT_ALL_CHARACTERS)
-    # print(characters_result[:5])
-
-    # Iterate each tuple from characters query and insert into pg db characters table
-    for c in characters_result:
-        modify_db(
-            pg_conn,
-            pg_curs,
-            f"""
-                INSERT INTO characterscreator_character(
-                        "name", "level", "exp", "hp", "strength", "intelligence", "dexterity", "wisdom"
-                )
-                VALUES(
-                        '{c[1]}', {c[2]}, {c[3]}, {c[4]}, {c[5]}, {c[6]}, {c[7]}, {c[8]}
-                );
-            """,
-        )
-
-    # Test query
-    print(
-        query_db(
-            pg_conn,
-            pg_curs,
-            query="""
-            SELECT * FROM characterscreator_character
-            LIMIT 5;
-        """,
-        )
-    )
-
-    # close
-    pg_curs.close()
-    pg_conn.close()
