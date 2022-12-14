@@ -19,7 +19,7 @@ queries = {
 
 def csv_to_db(
     con,
-    csv_name="module1-introduction-to-sql\buddymove_holidayiq.csv",
+    csv_name="buddymove_holidayiq.csv",
 ):
     """Using an existing sqlite3 connection, writes contents of a csv to a new table.
 
