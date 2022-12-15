@@ -1,5 +1,5 @@
 # Bloomtech Data Science - Unit 3
-## 3.2.1: Intro to SQL
+## 3.2: SQL and Databases
 
 This repository serves to document and store my completed projects, assignments, and learning materials from the Bloomtech data science curriculum.
 
