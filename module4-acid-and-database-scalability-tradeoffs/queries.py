@@ -7,6 +7,7 @@ Queries to answer assignment questions for our deployed PostgreSQL database
 
 """
 import pipeline_pg
+import mongo
 
 # PostgreSQL Titanic Data queries------------------------------------------------
 titanic_queries = {
@@ -86,7 +87,22 @@ titanic_queries = {
 
 
 if __name__ == "__main__":
-    pg_conn, pg_curs = pipeline_pg.con_to_pg()
+    # QUERY postgresql titanic data #########################################
+    # # Connect to postgresql database
+    # pg_conn, pg_curs = pipeline_pg.con_to_pg()
 
-    for name, query in titanic_queries.items():
-        print(f"\nQuery {name} -> {pipeline_pg.query_db(pg_curs, query)}")
+    # # Print dictionary keys and resulting queries
+    # for name, query in titanic_queries.items():
+    #     print(f"\nQuery {name} -> {pipeline_pg.query_db(pg_curs, query)}")
+
+    # QUERY mongodb rpg data ################################################
+    answers = mongo.MongoAnswers()
+    answers.total_characters()
+    answers.total_items()
+    answers.total_weapons()
+    answers.total_non_weapons()
+    answers.character_items_first20()
+    answers.character_weapons_first20()
+    answers.avg_item_per_character()
+    answers.avg_weapon_per_character()
+    answers.show_results()
