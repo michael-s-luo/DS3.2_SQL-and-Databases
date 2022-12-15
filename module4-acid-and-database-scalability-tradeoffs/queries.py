@@ -23,7 +23,9 @@ titanic_queries = {
         ORDER BY pclass ASC
     """,
     "TOTAL_SURVIVAL_BY_CLASS": """
-        SELECT pclass, SUM(survived) as count_survived, COUNT(*) - SUM(survived) as count_died
+        SELECT pclass, 
+            SUM(survived) as count_survived, 
+            COUNT(*) - SUM(survived) as count_died
         FROM titanic
         GROUP BY pclass
         ORDER BY pclass ASC;
@@ -88,14 +90,17 @@ titanic_queries = {
 
 if __name__ == "__main__":
     # QUERY postgresql titanic data #########################################
-    # # Connect to postgresql database
-    # pg_conn, pg_curs = pipeline_pg.con_to_pg()
+    # Connect to postgresql database
+    pg_conn, pg_curs = pipeline_pg.con_to_pg()
 
-    # # Print dictionary keys and resulting queries
-    # for name, query in titanic_queries.items():
-    #     print(f"\nQuery {name} -> {pipeline_pg.query_db(pg_curs, query)}")
+    # Print dictionary keys and resulting queries
+    print("Posgresql Titanic Data Queries: \n")
+    for name, query in titanic_queries.items():
+        print(f"Query {name} -> {pipeline_pg.query_db(pg_curs, query)}")
 
     # QUERY mongodb rpg data ################################################
+    print("\nMongoDB RPG Queries: \n")
+
     answers = mongo.MongoAnswers()
     answers.total_characters()
     answers.total_items()
